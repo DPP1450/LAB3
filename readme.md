@@ -6,7 +6,7 @@
     3. child
 - customer 物件：紀錄顧客記本資訊（姓名、點數、累績消費金額）
 - rentRecord 物件：一筆租借資料
-- manage物件：儲存租借紀錄，顧客清單，video清單。每個顧客都有自己的租借紀錄，使用hashmap可以快速找到紀錄
+- manage物件：儲存租借紀錄，顧客清單，video清單。用一個動態陣列把所有的record儲存起來，另外hashmap加快搜尋
     - addRentRecord：新增一比租借資料，計算所需費用，可以累積的點數
     - getPrice：計算一比租借的費用 
     - getRecord：把特定顧客的租借紀錄print 出來，包含點數及消費金額
