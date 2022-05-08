@@ -72,10 +72,9 @@ public:
 class manage
 {
 public:
-    set<customer *> customers;                                 // 記錄所有的顧客
-    set<video *> videos;                                       // 記錄所有的片
-    vector<rentRecord *> rentRecords;                          //記錄所有租借資料
-    unordered_map<customer *, vector<rentRecord *>> recordMap; //用map可以快速查詢rentRecord
+    set<customer *> customers;        // 記錄所有的顧客
+    set<video *> videos;              // 記錄所有的片
+    vector<rentRecord *> rentRecords; //記錄所有租借資料
 
     void addRentRecord(customer *c, video *v, int totalDay)
     {
@@ -83,7 +82,6 @@ public:
         r->v = v;
         r->c = c;
         r->day = totalDay;
-        recordMap[c].push_back(r);
         rentRecords.push_back(r);
         c->totalAmount += getPrice(totalDay, v);
         c->point += v->point;
@@ -102,8 +100,9 @@ public:
     void getRecord(customer *c) // 印出特定顧客的租片紀錄
     {
         cout << "name :" << c->name << endl;
-        for (auto r : recordMap[c])
-            cout << r->v->name << " " << r->day << " days" << endl;
+        for (auto r : rentRecords)
+            if (r->c == c)
+                cout << r->v->name << " " << r->day << " days" << endl;
         cout << "totalAmount: " << c->totalAmount << "$" << endl;
         cout << "point: " << c->point << "pt" << endl
              << endl;
